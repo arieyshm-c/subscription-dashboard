@@ -3,7 +3,7 @@ import styles from "@/styles/Home.module.css";
 import React from "react";
 import { Table, Tooltip, Button } from "@nextui-org/react";
 import { Card, Text } from "@nextui-org/react";
-import { DeleteIcon } from "../components/DeleteButton.page";
+import { DeleteIcon } from "../components/DeleteButton";
 import {
   getDefaultWallets,
   RainbowKitProvider,
