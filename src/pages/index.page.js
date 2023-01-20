@@ -3,7 +3,7 @@ import styles from "@/styles/Home.module.css";
 import React from "react";
 import { Table, Tooltip, Button } from "@nextui-org/react";
 import { Card, Text } from "@nextui-org/react";
-import { DeleteIcon } from "./DeleteButton";
+import { DeleteIcon } from "./DeleteButton.page";
 import {
   getDefaultWallets,
   RainbowKitProvider,
@@ -12,7 +12,7 @@ import {
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import { DeleteModal } from "./DeleteModal";
+import { DeleteModal } from "./DeleteModalpage";
 
 const { chains, provider } = configureChains(
   [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
