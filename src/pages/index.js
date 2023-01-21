@@ -177,6 +177,7 @@ export default function Home() {
               >
                 <Card
                   variant="shadow"
+                  color="purple"
                   css={{
                     mw: "400px",
                     p: "$0 $10",
@@ -221,7 +222,8 @@ export default function Home() {
               <section>
                 <Table
                   sticked
-                  striped
+                  isPressable
+                  isHoverable
                   hoverable
                   bordered
                   aria-label="Subscription Table"
@@ -232,16 +234,17 @@ export default function Home() {
                     height: "auto",
                     minWidth: "100%",
                     fontFamily: "Century Gothic",
+                    color: "dimgrey" 
                   }}
                 >
-                  <Table.Header columns={columns}>
+                <Table.Header columns={columns}>
                     {(column) => (
                       <Table.Column
                         key={column.key}
                         hideHeader={column.key === "actions"}
                         align={column.key === "actions" ? "center" : "start"}
                       >
-                        <Text b size={20}>
+                        <Text b size={20} color="gainsboro">
                           {column.label}
                         </Text>
                       </Table.Column>
@@ -278,7 +281,7 @@ export default function Home() {
                                   justifyContent: "space-between",
                                 }}
                               >
-                                <Text size={16} b>{`${item[columnKey]} `}</Text>
+                                <Text size={16} color="gainsboro" b>{`${item[columnKey]} `}</Text>
                                 <span
                                   style={{
                                     cursor: "pointer",
@@ -298,19 +301,21 @@ export default function Home() {
                               {
                                 <Text
                                   b
-                                  size={16}
+                                  size={16} color="gainsboro"
                                 >{`${item[columnKey]} $`}</Text>
                               }
                             </Table.Cell>
                           ) : (
                             <Table.Cell>
-                              <Text b size={16} css={{ tt: "capitalize" }}>
+                              <Text b size={16} color="gainsboro" css={{ tt: "capitalize" }}>
                                 {item[columnKey]}
                               </Text>
                             </Table.Cell>
                           )
                         }
+                        
                       </Table.Row>
+                      
                     )}
                   </Table.Body>
                 </Table>
