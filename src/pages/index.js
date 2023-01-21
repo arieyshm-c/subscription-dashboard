@@ -13,11 +13,16 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { DeleteModal } from "../components/DeleteModal";
+import { connectorsForWallets } from '@rainbow-me/rainbowkit';
+import { useAddRecentTransaction } from '@rainbow-me/rainbowkit'
+
+
 
 const { chains, provider } = configureChains(
   [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
   [alchemyProvider({ alchemyId: process.env.ALCHEMY_ID }), publicProvider()]
 );
+
 
 const { connectors } = getDefaultWallets({
   appName: "My RainbowKit App",
@@ -34,7 +39,7 @@ const data = [
   {
     id: 1,
     name: "Basic Plan",
-    company: "Netflix",
+    company: "USDT",
     pricing: 10,
     tokenAllowance: 200,
     nextPaymentDueDate: "18/10/2022",
@@ -42,7 +47,7 @@ const data = [
   {
     id: 2,
     name: "Advance Plan",
-    company: "Amazon",
+    company: "USDC",
     pricing: 10,
     tokenAllowance: 200,
     nextPaymentDueDate: "16/8/2022",
@@ -50,23 +55,23 @@ const data = [
   {
     id: 3,
     name: "Monthly Plan",
-    company: "Hotstar",
+    company: "DAI",
     pricing: 83,
-    tokenAllowance: 60,
+    tokenAllowance: 650,
     nextPaymentDueDate: "01/10/2023",
   },
   {
     id: 4,
     name: "Gold Plan",
-    company: "Zee 5",
+    company: "WETH",
     pricing: 77,
-    tokenAllowance: 50,
+    tokenAllowance: 150,
     nextPaymentDueDate: "18/8/2023",
   },
   {
     id: 5,
     name: "Basic Plan",
-    company: "Voot",
+    company: "MANA",
     pricing: 25,
     tokenAllowance: 100,
     nextPaymentDueDate: "21/9/2023",
@@ -74,7 +79,7 @@ const data = [
   {
     id: 6,
     name: "Premium Plan",
-    company: "Linkedin",
+    company: "BAT",
     pricing: 150,
     tokenAllowance: 150,
     nextPaymentDueDate: "29/3/2023",
@@ -95,7 +100,6 @@ export default function Home() {
     return sumWithInitial;
   };
 
-  //Columns to render the table on basis of key
   const columns = [
     {
       key: "name",
@@ -141,14 +145,38 @@ export default function Home() {
     <>
       <div className={styles.container}>
         <main className={styles.main}>
-          <section>
-            <h2 className={styles.title}>Subscriptions Dashoard</h2>
-          </section>
           <WagmiConfig client={wagmiClient}>
-            <RainbowKitProvider chains={chains}>
-              <section style={{ marginBottom: "10px" }}>
+            <RainbowKitProvider chains={chains} showRecentTransactions={true}>
+            
+            <button
+      onClick={() => {
+        addRecentTransaction({
+          hash: '0x...',
+          description: '...',
+        });
+      }}
+    >
+      
+      Add recent transaction
+    </button>
+              <section
+                style={{ display: "flex", justifyContent: "right" }}
+              >
+                
+                <div style={{ height: "max-content" }}>
+                  <ConnectButton label= "Connect wallet" accountStatus="avatar" />{" "}
+                </div>
+              </section>
+
+              <section
+                style={{
+                  marginBottom: "50px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
                 <Card
-                  variant="bordered"
+                  variant="shadow"
                   css={{
                     mw: "400px",
                     p: "$0 $10",
@@ -156,34 +184,54 @@ export default function Home() {
                   }}
                 >
                   <Card.Header style={{ padding: "0px" }}>
-                    <Text
+                  <Text
+                      h2
+                      style={{
+                        fontWeight: "bold",
+                        textDecoration: "thickness",
+                        fontFamily: "Impact",
+                        color: "dimgrey" 
+                      }}
+                    >
+                      
+                      SUBSCRIPTIONS
+                      <Card.Divider />  
+                    </Text>
+                    
+                    
+                  </Card.Header>
+                  <Card.Body style={{ padding: "0px" }}>
+                  <Text
                       h3
                       style={{
                         fontWeight: "bold",
-                        textDecoration: "underline",
+                        textDecoration: "thickness",
+                        fontFamily: "Century Gothic",
+                        color: "gray"
                       }}
+                     
                     >
-                      Total subscription spend $ /month
+                      Total subscription spent $ /month
+                      
                     </Text>
-                  </Card.Header>
-                  <Card.Body style={{ padding: "0px" }}>
-                    <Text h2>{`${getotalSubscription()} $ / month`}</Text>
+                    <Text h2>{`${getotalSubscription()} $ / month`} </Text>
                   </Card.Body>
                 </Card>
               </section>
               <section>
                 <Table
                   sticked
+                  striped
                   hoverable
-                  aria-label="Subscription Table"
                   bordered
-                  lined
+                  aria-label="Subscription Table"
                   headerLined
-                  shadow={false}
-                  selectionMode="none"
+                  shadow={true}
+                  selectionMode="null"
                   css={{
                     height: "auto",
                     minWidth: "100%",
+                    fontFamily: "Century Gothic",
                   }}
                 >
                   <Table.Header columns={columns}>
@@ -230,17 +278,18 @@ export default function Home() {
                                   justifyContent: "space-between",
                                 }}
                               >
-                                <Text
-                                  size={16}
-                                  b
-                                >{`${item[columnKey]} $`}</Text>
+                                <Text size={16} b>{`${item[columnKey]} `}</Text>
                                 <span
                                   style={{
                                     cursor: "pointer",
                                     marginLeft: "10px",
                                   }}
                                 >
-                                  <ConnectButton />
+                                  <ConnectButton
+                                    label="Update"
+                                    accountStatus="avatar"
+                                    showBalance={true}
+                                  />
                                 </span>
                               </div>
                             </Table.Cell>
