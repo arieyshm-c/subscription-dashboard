@@ -107,23 +107,23 @@ export default function Home() {
     },
     {
       key: "company",
-      label: "Company",
+      label: "COMPANY",
     },
     {
       key: "pricing",
-      label: "Pricing",
+      label: "PRICING",
     },
     {
       key: "tokenAllowance",
-      label: "Token Allowance",
+      label: "TOKEN ALLOWANCE",
     },
     {
       key: "nextPaymentDueDate",
-      label: "Next Payment Date",
+      label: "NEXT PAYMENT DUE DATE",
     },
     {
       key: "actions",
-      label: "Action",
+      label: "ACTION",
     },
   ];
 
@@ -175,13 +175,15 @@ export default function Home() {
                   justifyContent: "space-between",
                 }}
               >
-                <Card
-                  variant="shadow"
+                <Card 
+                  isHoverable isPressable variant="shadow"
                   color="purple"
                   css={{
                     mw: "400px",
                     p: "$0 $10",
                     bg: "rgba(255, 255, 255, 0.8)",
+                    $$cardColor: "purple",
+                    
                   }}
                 >
                   <Card.Header style={{ padding: "0px" }}>
@@ -191,7 +193,7 @@ export default function Home() {
                         fontWeight: "bold",
                         textDecoration: "thickness",
                         fontFamily: "Impact",
-                        color: "dimgrey" 
+                        color: "gray" 
                       }}
                     >
                       
@@ -208,14 +210,21 @@ export default function Home() {
                         fontWeight: "bold",
                         textDecoration: "thickness",
                         fontFamily: "Century Gothic",
-                        color: "gray"
+                        color: "darkgray"
                       }}
                      
                     >
                       Total subscription spent $ /month
                       
                     </Text>
-                    <Text h2>{`${getotalSubscription()} $ / month`} </Text>
+                    <Text 
+                    h2 
+                    style={{
+                      fontWeight: "bold",
+                      textDecoration: "thickness",
+                      fontFamily: "Century Gothic",
+                      color: "darkgray"
+                    }}>{`${getotalSubscription()} $ / month`} </Text>
                   </Card.Body>
                 </Card>
               </section>
@@ -244,7 +253,7 @@ export default function Home() {
                         hideHeader={column.key === "actions"}
                         align={column.key === "actions" ? "center" : "start"}
                       >
-                        <Text b size={20} color="gainsboro">
+                        <Text b size={20} color="dimgray">
                           {column.label}
                         </Text>
                       </Table.Column>
@@ -281,7 +290,7 @@ export default function Home() {
                                   justifyContent: "space-between",
                                 }}
                               >
-                                <Text size={16} color="gainsboro" b>{`${item[columnKey]} `}</Text>
+                                <Text size={16} color="dimgray" b>{`${item[columnKey]} `}</Text>
                                 <span
                                   style={{
                                     cursor: "pointer",
@@ -301,13 +310,13 @@ export default function Home() {
                               {
                                 <Text
                                   b
-                                  size={16} color="gainsboro"
+                                  size={16} color="dimgray"
                                 >{`${item[columnKey]} $`}</Text>
                               }
                             </Table.Cell>
                           ) : (
                             <Table.Cell>
-                              <Text b size={16} color="gainsboro" css={{ tt: "capitalize" }}>
+                              <Text b size={16} color="dimgray" css={{ tt: "capitalize" }}>
                                 {item[columnKey]}
                               </Text>
                             </Table.Cell>
